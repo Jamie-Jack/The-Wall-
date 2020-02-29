@@ -43,7 +43,7 @@ namespace Com.NewVisionGamesStudio.TheWall
 
                 var linex = agent.path.corners[i].x;
                 var linez = agent.path.corners[i].z;
-                var height = 10f;
+                var height = agent.path.corners[i].y;
                 line.SetPosition(i, new Vector3(linex, height, linez)); //go through each corner and set that to the line renderer's position
             }
         }

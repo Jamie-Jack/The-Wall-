@@ -10,9 +10,12 @@ namespace Com.NewVisionGamesStudio.TheWall
 
         public Text coinCount;
         public int coinInt;
+
+  
         private void Start()
         {
             UpdateCoins(0);
+          
         }
 
         public void UpdateCoins(int coinUpdateAmount)

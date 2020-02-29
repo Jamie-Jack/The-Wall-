@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Com.NewVisionGamesStudio.TheWall
 {
@@ -35,17 +36,20 @@ namespace Com.NewVisionGamesStudio.TheWall
         private bool sliding;
         private float slide_time;
         private Vector3 slide_dir;
-        
-       
+
+        private Weapon Weapon;
+        private Text ui_ammo;
 
         private void Start()
         {
+            Weapon = GetComponent<Weapon>();
             baseFOV = normalCam.fieldOfView;
             origin = normalCam.transform.localPosition;
             Camera.main.enabled = false;
             rig = GetComponent<Rigidbody>();
             weaponParentOrigin = weaponParent.localPosition;
             weaponParentCurrentPosition = weaponParentOrigin;
+            ui_ammo = GameObject.Find("Hud/Ammo/Text").GetComponent<Text>();
         }
 
 
@@ -94,6 +98,11 @@ namespace Com.NewVisionGamesStudio.TheWall
                 movementCounter += Time.deltaTime * 7f;
                 weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetWeaponBobPosition, Time.deltaTime * 10f);
             }
+            // UI Refreshes 
+
+            Weapon.RefreshAmmo(ui_ammo);
+
+
 
             // Walk and Slide
             Vector3 T_Direction = Vector3.zero;

@@ -19,23 +19,42 @@ namespace Com.NewVisionGamesStudio.TheWall
         private int CurrentIndex;
         private GameObject currentEquipment;
 
+        private bool isReloading;
+
         void Start()
         {
-
+            foreach (Gun a in loadout) a.Initialize();
+            Equip(0);
         }
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1)) Equip(0);
+            if (Input.GetKeyDown(KeyCode.Alpha2)) Equip(1);
+            if (Input.GetKeyDown(KeyCode.Alpha3)) Equip(2);
 
             if (currentEquipment != null)
             {
                 Aim(Input.GetMouseButton(1));
 
-                if (Input.GetMouseButtonDown(0)&& currentCooldown <=0)
+                if (loadout[CurrentIndex].burst != 1)
                 {
-                    Shoot();
+                    if (Input.GetMouseButtonDown(0) && currentCooldown <= 0)
+                    {
+                        if (loadout[CurrentIndex].FireBullet()) Shoot();
+                        else StartCoroutine(Reload(loadout[CurrentIndex].reload));
+                    }
                 }
+                else
+                {
+                    if (Input.GetMouseButton(0) && currentCooldown <= 0)
+                    {
+                        if (loadout[CurrentIndex].FireBullet()) Shoot();
+                        else StartCoroutine(Reload(loadout[CurrentIndex].reload));
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.R)) StartCoroutine(Reload(loadout[CurrentIndex].reload));
 
                 // weapon position elasticity
                 currentEquipment.transform.localPosition = Vector3.Lerp(currentEquipment.transform.localPosition, Vector3.zero, Time.deltaTime * 4f);
@@ -45,9 +64,27 @@ namespace Com.NewVisionGamesStudio.TheWall
             }
         }
 
+        // Private Methods 
+         IEnumerator Reload(float p_wait)
+        {
+            isReloading = true;
+            currentEquipment.SetActive(false);
+
+            yield return new WaitForSeconds(p_wait);
+
+            loadout[CurrentIndex].Reload();
+            currentEquipment.SetActive(true);
+
+            isReloading = false;
+        }
+
         void Equip(int p_ind)
         {
-            if (currentEquipment != null) Destroy(currentEquipment);
+            if (currentEquipment != null)
+            {
+               if(isReloading) StopCoroutine("Reload");
+                Destroy(currentEquipment);
+            }
 
             CurrentIndex = p_ind;
 
@@ -108,6 +145,13 @@ namespace Com.NewVisionGamesStudio.TheWall
 
             //cooldown
             currentCooldown = loadout[CurrentIndex].firerate;
+        }
+        public void RefreshAmmo (Text p_text)
+        {
+            int t_clip = loadout[CurrentIndex].GetClip();
+            int t_stash = loadout[CurrentIndex].GetStash();
+
+            p_text.text =" Ammo: " + t_clip.ToString("D2") + " / " + t_stash.ToString("D2");
         }
     }
 }

@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadout:
+  - {fileID: 11400000, guid: 2887dc7eb9e10394b86757685dcccaa5, type: 2}
   - {fileID: 11400000, guid: e61656d4f2b91f042bd5341337ebce69, type: 2}
   weaponParent: {fileID: 2621801186940356321}
   bulletholePrefab: {fileID: 2298723055795622668, guid: b73bf13b0c2059c449c8c2b9e400775a,
@@ -292,6 +293,8 @@ MonoBehaviour:
   gunBase: {fileID: 0}
   matsBase: []
   matsGunBarrel: []
+  greenMatsBase: []
+  greenMatsGunBarrel: []
   greenmat: {fileID: 2100000, guid: fdca67c4909addb489a98e4e89f3cf4d, type: 2}
   PVs: {fileID: 0}
 --- !u!1 &2621801186706485147
