@@ -22,4 +22,5 @@ MonoBehaviour:
   reload: 3
   ammo: 20
   clipsize: 1
+  burst: 0
   prefab: {fileID: 2290053703558451981, guid: 33637805bf672dc4b91a61de3947f93a, type: 3}
