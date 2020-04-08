@@ -277,6 +277,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8078567283923645945, guid: 0cab4cee175e23449b09e66a20b5fee0,
     type: 3}
   firePoint: {fileID: 1750980110}
+  turret_Shoot: {fileID: 8300000, guid: 994dd482ac857e94388499adcfb53f20, type: 3}
 --- !u!208 &-47266046415725333
 NavMeshObstacle:
   m_ObjectHideFlags: 0

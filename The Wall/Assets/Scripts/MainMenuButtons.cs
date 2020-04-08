@@ -9,11 +9,11 @@ namespace Com.NewVisionGamesStudio.TheWall
     {
         public void StartButton()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
         public void OptionsButton()
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
     }
 }

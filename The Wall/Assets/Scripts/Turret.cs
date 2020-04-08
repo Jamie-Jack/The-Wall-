@@ -20,6 +20,7 @@ namespace Com.NewVisionGamesStudio.TheWall
 
         public GameObject bulletPrefab;
         public Transform firePoint;
+        public AudioClip turret_Shoot;
 
 
 
@@ -78,6 +79,7 @@ namespace Com.NewVisionGamesStudio.TheWall
         void Shoot()
         {
             GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            AudioManager.Instance.PlayMe(turret_Shoot);
             TurretBullet bullet = bulletGO.GetComponent<TurretBullet>();
 
             if (bullet != null)
